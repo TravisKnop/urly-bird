@@ -15,9 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from shorturl.views import HomeView
+from shorturl.views import UrlRedirectView, UrlListView, UserCreateView
 
 urlpatterns = [
-    url(r'^$', HomeView.as_view(), name='homepage'),
+    url(r'^$', UrlListView.as_view(), name="url_list"),
+    url(r'^create_user/', UserCreateView.as_view(), name="user_create"),
+    url(r'^accounts/', include('django.contrib.auth.urls')),
+    url(r'^peanut/(?P<short_url>\w+)', UrlRedirectView.as_view(), name="url_redirect"),
     url(r'^admin/', include(admin.site.urls)),
 ]

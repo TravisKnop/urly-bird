@@ -1,10 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html>
+<head lang="en">
     <meta charset="UTF-8">
-    <title></title>
+    <title>URL Shortener</title>
 </head>
 <body>
-This is the homepage :)
+<h1>{{ request.user.username }}</h1>
+
+{% if request.user.id %}
+    <a href="{% url 'logout' %}?next=/">Logout</a>
+{% else %}
+    <a href="{% url 'login' %}">Login</a>
+    <a href="{% url 'user_create' %}">Create Account?</a>
+{% endif %}
+
+{% block content %}
+
+{% endblock %}
 </body>
 </html>
