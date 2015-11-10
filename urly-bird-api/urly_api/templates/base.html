@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+    {% if request.user.id %}
+        <a href="{% url 'logout' %}?next=/">Logout</a>
+    {% else %}
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'user_create' %}">Create Account?</a>
+    {% endif %}
+
+    <h1> Want to log in? </h1>
+    <form>
+        Enter long url: <br>
+        <input type="text" name="firstname">
+        <br>
+    </form>
+</body>
+</html>
