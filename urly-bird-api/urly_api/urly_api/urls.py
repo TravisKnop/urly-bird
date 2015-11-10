@@ -21,6 +21,6 @@ urlpatterns = [
     url(r'^$', UrlListView.as_view(), name="url_list"),
     url(r'^create_user/', UserCreateView.as_view(), name="user_create"),
     url(r'^accounts/', include('django.contrib.auth.urls')),
-    url(r'^peanut/(?P<short_url>\w+)', UrlRedirectView.as_view(), name="url_redirect"),
+    url(r'^new_url/(?P<short_url>\w+)', UrlRedirectView.as_view(), name="url_redirect"),
     url(r'^admin/', include(admin.site.urls)),
 ]
