@@ -41,3 +41,4 @@ class UrlCounter(models.Model):
 def url_record_post_save(sender, **kwargs):
     instance = kwargs.get("instance")
     instance.short_url = shortener(instance.long_url)
+
