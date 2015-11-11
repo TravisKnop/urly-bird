@@ -16,6 +16,13 @@ class Profile(models.Model):
         return "{}'s profile".format(self.user.username)
 
 
+class UrlMaker(models.Model):
+    author = models.ForeignKey(User)
+    long_url = models.URLField()
+    short_url = models.CharField(max_length=100)
+    time_made = models.DateTimeField(auto_now_add=True)
+
+
 @receiver(post_save, sender=User)
 def user_post_save(sender, **kwargs):
     instance = kwargs.get("instance")

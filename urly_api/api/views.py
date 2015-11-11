@@ -4,18 +4,30 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
-from django.views.generic import View, ListView, CreateView
-from api.models import UrlRecord, UrlCounter
+from django.views.generic import View, ListView, CreateView, DetailView
+from api.models import UrlRecord, UrlCounter, UrlMaker
 
 
 @property
 def get_long_url(long_url):
-    print(long_url)
     return long_url
+
+
+class UrlCreationView(CreateView):
+    model = UrlMaker
+    fields = ["long_url", "author", "time_made"]
+    success_url = "/"
+
+    def create_url(self, form):
+        model = form.save()
 
 
 class UrlListView(ListView):
     model = UrlRecord
+
+
+class UrlDetailView(DetailView):
+    model = UrlMaker
 
 
 class UrlRedirectView(View):
