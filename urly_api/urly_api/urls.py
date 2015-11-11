@@ -19,8 +19,9 @@ from api.views import UrlRedirectView, UrlListView, UserCreateView
 
 urlpatterns = [
     url(r'^$', UrlListView.as_view(), name="url_list"),
-    url(r'^create_user/', UserCreateView.as_view(), name="user_create"),
+    url(r'^create_user/', UserCreateView.as_view(), name="create_user"),
     url(r'^accounts/', include('django.contrib.auth.urls')),
     url(r'^new_url/(?P<short_url>\w+)', UrlRedirectView.as_view(), name="url_redirect"),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^api/$', include('framework.urls')),
 ]
