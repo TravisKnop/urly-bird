@@ -3,27 +3,29 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from hashlib import md5
+import datetime
 
 from django.views.generic import View, ListView, CreateView, DetailView
-from api.models import UrlRecord, UrlCounter, UrlMaker
+from api.models import UrlRecord, UrlCounter, UrlMaker, shortener
 
 
-@property
-def get_long_url(long_url):
-    return long_url
-
-
+# url(r'^create_url/$', login_required(UrlCreationView.as_view()), name="url_create"),
 class UrlCreationView(CreateView):
     model = UrlMaker
-    fields = ["long_url", "author", "time_made"]
+    fields = ["long_url", "author", "time_made", "short_url"]
     success_url = "/"
 
-    def create_url(self, form):
-        model = form.save()
+    def form_valid(self, form):
+        model = form.save(commit=False)
+        model.user = self.request.user
+        return super().form_valid(form)
 
 
-class UrlListView(ListView):
+# url(r'^$', UserUrlListView.as_view(), name="url_list"),
+class UserUrlListView(ListView):
     model = UrlRecord
+    template_name = "index.html"
 
 
 class UrlDetailView(DetailView):
@@ -38,9 +40,9 @@ class UrlRedirectView(View):
         return HttpResponseRedirect(url.long_url)
 
 
+# url(r'^create_user/', UserCreateView.as_view(), name="create_user"),
 class UserCreateView(CreateView):
     model = User
     form_class = UserCreationForm
-    success_url = "/"
-
+    success_url = "/accounts/login"
 

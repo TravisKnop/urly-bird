@@ -15,8 +15,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Profile',
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False, auto_created=True, verbose_name='ID')),
-                ('credit_card', models.CharField(max_length=20, blank=True)),
+                ('id', models.AutoField(auto_created=True, serialize=False, primary_key=True, verbose_name='ID')),
+                ('credit_card', models.CharField(blank=True, max_length=20)),
                 ('weight', models.FloatField(null=True)),
                 ('user', models.OneToOneField(to=settings.AUTH_USER_MODEL)),
             ],
@@ -24,15 +24,27 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='UrlCounter',
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False, auto_created=True, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True, serialize=False, primary_key=True, verbose_name='ID')),
+            ],
+        ),
+        migrations.CreateModel(
+            name='UrlMaker',
+            fields=[
+                ('id', models.AutoField(auto_created=True, serialize=False, primary_key=True, verbose_name='ID')),
+                ('long_url', models.URLField()),
+                ('short_url', models.CharField(max_length=100)),
+                ('time_made', models.DateTimeField(auto_now_add=True)),
+                ('author', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
             ],
         ),
         migrations.CreateModel(
             name='UrlRecord',
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False, auto_created=True, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True, serialize=False, primary_key=True, verbose_name='ID')),
                 ('long_url', models.TextField()),
-                ('short_url', models.CharField(max_length=100, blank=True)),
+                ('short_url', models.CharField(blank=True, max_length=100)),
+                ('time_made', models.DateTimeField(auto_now_add=True)),
+                ('author', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
             ],
         ),
         migrations.AddField(

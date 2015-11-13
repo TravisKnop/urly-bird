@@ -13,5 +13,3 @@ class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         lookup_field = 'user'
-
-

@@ -16,14 +16,14 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.auth.decorators import login_required
-from api.views import UrlRedirectView, UrlListView, UserCreateView, UrlCreationView
+from api.views import UrlRedirectView, UserCreateView, UrlCreationView, UserUrlListView
 
 urlpatterns = [
-    url(r'^$', UrlListView.as_view(), name="url_list"),
+    url(r'^$', UserUrlListView.as_view(), name="url_list"),
     url(r'^create_user/', UserCreateView.as_view(), name="create_user"),
-    url(r'^create_url/$', login_required(UrlCreationView.as_view()), name="bookmark_create"),
+    url(r'^create_url/$', login_required(UrlCreationView.as_view()), name="url_create"),
     url(r'^accounts/', include('django.contrib.auth.urls')),
     url(r'^new_url/(?P<short_url>\w+)', UrlRedirectView.as_view(), name="url_redirect"),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^api/$', include('framework.urls')),
+#    url(r'^api/$', include('framework.urls')),
 ]

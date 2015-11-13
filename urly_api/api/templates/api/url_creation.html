@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <form>
+        Enter long url: <br>
+        <input type="text" name="long_url"><br><br>
+        Here is your shortened url: <br>
+        {{ form_valid }}
+    </form>
+{% endblock %}

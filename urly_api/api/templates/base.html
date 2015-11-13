@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -7,19 +9,19 @@
 </head>
 <body>
 <div class="container-fluid">
-    {% if request.user.id %}
-        <a href="{% url 'logout' %}?next=/">Logout</a>
-    {% else %}
-        <a href="{% url 'login' %}">Login</a>
-        <a href="{% url 'create_user' %}">Create Account?</a>
-    {% endif %}
+    <div class="nav navbar">
+        {% if request.user.id %}
+            <a href="{% url 'logout' %}?next=/">Logout</a>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'create_user' %}">Create Account</a>
+        {% endif %}
+    </div>
+    <h2> Welcome </h2>
+    <h4>Travis' url shortener</h4><br>
 
-    <h1> Want to log in? </h1>
-    <form>
-        Enter long url: <br>
-        <input type="text" name="firstname">
-        <br>
-    </form>
+{% block content %}
+{% endblock %}
 </div>
 </body>
 </html>
