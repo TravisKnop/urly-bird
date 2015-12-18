@@ -1,3 +1,11 @@
+This is a website built using Django to do the following:
+ - shorten a URL (similar to goo.gl)
+ - track the times a user uses each shortened URL
+ - provide a restful API
+
+There are still some bugs to be worked out, but the underlying code is here.
+
+
 # URLy Bird API
 
 ## Description
